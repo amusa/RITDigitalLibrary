@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAccountInfoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAccountInfoEmpty}" rendered="#{accountInfoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{accountInfoController.items.rowCount > 0}">
+                    <h:outputText value="#{accountInfoController.pagination.pageFirstItem + 1}..#{accountInfoController.pagination.pageLastItem + 1}/#{accountInfoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{accountInfoController.previous}" value="#{bundle.Previous} #{accountInfoController.pagination.pageSize}" rendered="#{accountInfoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{accountInfoController.next}" value="#{bundle.Next} #{accountInfoController.pagination.pageSize}" rendered="#{accountInfoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{accountInfoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccountInfoTitle_accountInfoId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.accountInfoId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccountInfoTitle_secAns}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.secAns}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccountInfoTitle_password}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.password}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccountInfoTitle_userId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccountInfoTitle_secQuestionId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.secQuestionId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{accountInfoController.prepareView}" value="#{bundle.ListAccountInfoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{accountInfoController.prepareEdit}" value="#{bundle.ListAccountInfoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{accountInfoController.destroy}" value="#{bundle.ListAccountInfoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{accountInfoController.prepareCreate}" value="#{bundle.ListAccountInfoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAccountInfoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

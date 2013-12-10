@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePublicationTypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePublicationTypeLabel_pubTypeCode}" for="pubTypeCode" />
+                    <h:inputText id="pubTypeCode" value="#{publicationTypeController.selected.pubTypeCode}" title="#{bundle.CreatePublicationTypeTitle_pubTypeCode}" required="true" requiredMessage="#{bundle.CreatePublicationTypeRequiredMessage_pubTypeCode}"/>
+                    <h:outputLabel value="#{bundle.CreatePublicationTypeLabel_pubTypeDesc}" for="pubTypeDesc" />
+                    <h:inputText id="pubTypeDesc" value="#{publicationTypeController.selected.pubTypeDesc}" title="#{bundle.CreatePublicationTypeTitle_pubTypeDesc}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{publicationTypeController.create}" value="#{bundle.CreatePublicationTypeSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{publicationTypeController.prepareList}" value="#{bundle.CreatePublicationTypeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePublicationTypeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

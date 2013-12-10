@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPublicationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPublicationLabel_pubId}"/>
+                    <h:outputText value="#{publicationController.selected.pubId}" title="#{bundle.ViewPublicationTitle_pubId}"/>
+                    <h:outputText value="#{bundle.ViewPublicationLabel_title}"/>
+                    <h:outputText value="#{publicationController.selected.title}" title="#{bundle.ViewPublicationTitle_title}"/>
+                    <h:outputText value="#{bundle.ViewPublicationLabel_abstract1}"/>
+                    <h:outputText value="#{publicationController.selected.abstract1}" title="#{bundle.ViewPublicationTitle_abstract1}"/>
+                    <h:outputText value="#{bundle.ViewPublicationLabel_pubTypeCode}"/>
+                    <h:outputText value="#{publicationController.selected.pubTypeCode}" title="#{bundle.ViewPublicationTitle_pubTypeCode}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{publicationController.destroyAndView}" value="#{bundle.ViewPublicationDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPublicationEditLink}"/>
+                <br />
+                <h:commandLink action="#{publicationController.prepareCreate}" value="#{bundle.ViewPublicationCreateLink}" />
+                <br />
+                <h:commandLink action="#{publicationController.prepareList}" value="#{bundle.ViewPublicationShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPublicationIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

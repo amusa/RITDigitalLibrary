@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPublicationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPublicationLabel_pubId}" for="pubId" />
+                    <h:inputText id="pubId" value="#{publicationController.selected.pubId}" title="#{bundle.EditPublicationTitle_pubId}" required="true" requiredMessage="#{bundle.EditPublicationRequiredMessage_pubId}"/>
+                    <h:outputLabel value="#{bundle.EditPublicationLabel_title}" for="title" />
+                    <h:inputText id="title" value="#{publicationController.selected.title}" title="#{bundle.EditPublicationTitle_title}" required="true" requiredMessage="#{bundle.EditPublicationRequiredMessage_title}"/>
+                    <h:outputLabel value="#{bundle.EditPublicationLabel_abstract1}" for="abstract1" />
+                    <h:inputTextarea rows="4" cols="30" id="abstract1" value="#{publicationController.selected.abstract1}" title="#{bundle.EditPublicationTitle_abstract1}" required="true" requiredMessage="#{bundle.EditPublicationRequiredMessage_abstract1}"/>
+                    <h:outputLabel value="#{bundle.EditPublicationLabel_pubTypeCode}" for="pubTypeCode" />
+                    <h:selectOneMenu id="pubTypeCode" value="#{publicationController.selected.pubTypeCode}" title="#{bundle.EditPublicationTitle_pubTypeCode}" required="true" requiredMessage="#{bundle.EditPublicationRequiredMessage_pubTypeCode}">
+                        <f:selectItems value="#{publicationTypeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{publicationController.update}" value="#{bundle.EditPublicationSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPublicationViewLink}"/>
+                <br />
+                <h:commandLink action="#{publicationController.prepareList}" value="#{bundle.EditPublicationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPublicationIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

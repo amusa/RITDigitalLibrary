@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPublicationTypeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPublicationTypeEmpty}" rendered="#{publicationTypeController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{publicationTypeController.items.rowCount > 0}">
+                    <h:outputText value="#{publicationTypeController.pagination.pageFirstItem + 1}..#{publicationTypeController.pagination.pageLastItem + 1}/#{publicationTypeController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{publicationTypeController.previous}" value="#{bundle.Previous} #{publicationTypeController.pagination.pageSize}" rendered="#{publicationTypeController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{publicationTypeController.next}" value="#{bundle.Next} #{publicationTypeController.pagination.pageSize}" rendered="#{publicationTypeController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{publicationTypeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicationTypeTitle_pubTypeCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pubTypeCode}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicationTypeTitle_pubTypeDesc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pubTypeDesc}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{publicationTypeController.prepareView}" value="#{bundle.ListPublicationTypeViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{publicationTypeController.prepareEdit}" value="#{bundle.ListPublicationTypeEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{publicationTypeController.destroy}" value="#{bundle.ListPublicationTypeDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{publicationTypeController.prepareCreate}" value="#{bundle.ListPublicationTypeCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPublicationTypeIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
